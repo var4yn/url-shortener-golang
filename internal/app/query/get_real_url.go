@@ -11,7 +11,7 @@ type GetRealUrlQuery struct {
 }
 
 // constructor
-func NewGetRealUrl(repo GetRealUrlRepository) GetRealUrlQuery {
+func NewGetRealUrlQuery(repo GetRealUrlRepository) GetRealUrlQuery {
 	return GetRealUrlQuery{repo}
 }
 
