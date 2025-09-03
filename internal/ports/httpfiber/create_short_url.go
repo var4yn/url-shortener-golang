@@ -22,13 +22,21 @@ func createShortUrlHandler(c fiber.Ctx) error {
 			JSON(fiber.Map{"error": "invalid request"})
 	}
 
-	_, ok := c.Locals("state").(*depend.AppState)
+	state, ok := c.Locals("state").(*depend.AppState)
 
 	if !ok {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	id := "abc123"
+	id, err := state.CreateShortUrlCommand.Execute(req.URL)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(
+			fiber.Map{
+				"error": err.Error(),
+			},
+		)
+	}
 
 	res := ShortUrlResponse{ID: id}
 	return c.JSON(res)
