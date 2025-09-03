@@ -1,7 +1,12 @@
 package main
 
-import "fmt"
+import (
+	"log"
+	"url-shortener/internal/ports/httpfiber"
+)
 
 func main() {
-	fmt.Println("Hello World!")
+	app := httpfiber.GetRouter()
+
+	log.Fatal(app.Listen(":3000"))
 }
