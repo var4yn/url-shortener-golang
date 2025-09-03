@@ -2,7 +2,7 @@ package query
 
 // interface for repo
 type GetRealUrlRepository interface {
-	get(id string) (string, error)
+	Get(id string) (string, error)
 }
 
 // query struct
@@ -17,5 +17,5 @@ func NewGetRealUrlQuery(repo GetRealUrlRepository) GetRealUrlQuery {
 
 // execute method
 func (gr *GetRealUrlQuery) execute(id string) (string, error) {
-	return gr.repo.get(id)
+	return gr.repo.Get(id)
 }

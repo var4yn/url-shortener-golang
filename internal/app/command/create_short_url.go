@@ -6,7 +6,7 @@ import (
 )
 
 type CreateShortUrlRepository interface {
-	save(url string) (string, error)
+	Save(url string, id string) error
 }
 
 type CreateShortUrlCommand struct {
@@ -28,5 +28,9 @@ func (cs *CreateShortUrlCommand) execute(real_url string) (string, error) {
 		return "", err
 	}
 
-	return u.String(), nil
+	id := cs.generator.Generate()
+
+	err = cs.repo.Save(u.String(), id)
+
+	return id, err
 }
