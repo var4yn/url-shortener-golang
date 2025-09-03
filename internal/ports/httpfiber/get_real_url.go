@@ -24,7 +24,15 @@ func getRealUrlHandler(c fiber.Ctx) error {
 		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
-	url := ""
+	url, err := state.GetRealUrlQuery.Execute(id)
+
+	if err != nil {
+		return c.Status(fiber.StatusInternalServerError).JSON(
+			fiber.Map{
+				"error": err.Error(),
+			},
+		)
+	}
 
 	res := RealUrlResponse{URL: url}
 	return c.JSON(res)
