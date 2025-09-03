@@ -21,7 +21,7 @@ func NewCreateShortUrlCommand(repo CreateShortUrlRepository, generator generator
 	}
 }
 
-func (cs *CreateShortUrlCommand) execute(real_url string) (string, error) {
+func (cs *CreateShortUrlCommand) Execute(real_url string) (string, error) {
 	// url validate
 	u, err := url.ParseRequestURI(real_url)
 	if err != nil {

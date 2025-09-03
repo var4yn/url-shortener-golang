@@ -18,7 +18,7 @@ func getRealUrlHandler(c fiber.Ctx) error {
 		})
 	}
 
-	_, ok := c.Locals("state").(*depend.AppState)
+	state, ok := c.Locals("state").(*depend.AppState)
 
 	if !ok {
 		return c.SendStatus(fiber.StatusInternalServerError)

@@ -16,6 +16,6 @@ func NewGetRealUrlQuery(repo GetRealUrlRepository) GetRealUrlQuery {
 }
 
 // execute method
-func (gr *GetRealUrlQuery) execute(id string) (string, error) {
+func (gr *GetRealUrlQuery) Execute(id string) (string, error) {
 	return gr.repo.Get(id)
 }
