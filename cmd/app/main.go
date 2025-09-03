@@ -13,10 +13,12 @@ func main() {
 	generator := generator.NanoidGenerator{}
 	var store inmemory.InMemoryStore
 
-	create_short_url_repo := inmemory.InMemoryRepository{store: &store}
+	create_short_url_repo := inmemory.NewInMemoryRepository(&store)
+	get_real_url_repo := inmemory.NewInMemoryRepository(&store)
+
 	state := depend.NewAppState(generator, create_short_url_repo, get_real_url_repo)
 
-	app := httpfiber.GetRouter()
+	app := httpfiber.GetRouter(&state)
 
 	log.Fatal(app.Listen(":3000"))
 }

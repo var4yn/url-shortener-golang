@@ -9,6 +9,12 @@ type InMemoryRepository struct {
 	store *InMemoryStore
 }
 
+func NewInMemoryRepository(store *InMemoryStore) *InMemoryRepository {
+	return &InMemoryRepository{
+		store: store,
+	}
+}
+
 // implementation InMemoryStore for sync.Map[string]string
 type InMemoryStore struct {
 	mp sync.Map
