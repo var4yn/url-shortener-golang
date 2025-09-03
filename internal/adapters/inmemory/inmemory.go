@@ -6,7 +6,7 @@ import (
 )
 
 type InMemoryRepository struct {
-	store InMemoryStore
+	store *InMemoryStore
 }
 
 // implementation InMemoryStore for sync.Map[string]string

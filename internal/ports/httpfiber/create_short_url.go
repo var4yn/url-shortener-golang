@@ -1,6 +1,10 @@
 package httpfiber
 
-import "github.com/gofiber/fiber/v3"
+import (
+	"url-shortener/internal/depend"
+
+	"github.com/gofiber/fiber/v3"
+)
 
 type ShortUrlRequest struct {
 	URL string `json:"url"`
@@ -16,6 +20,12 @@ func createShortUrlHandler(c fiber.Ctx) error {
 	if err := c.Bind().Body(&req); err != nil {
 		return c.Status(fiber.StatusBadRequest).
 			JSON(fiber.Map{"error": "invalid request"})
+	}
+
+	_, ok := c.Locals("state").(*depend.AppState)
+
+	if !ok {
+		return c.SendStatus(fiber.StatusInternalServerError)
 	}
 
 	id := "abc123"
