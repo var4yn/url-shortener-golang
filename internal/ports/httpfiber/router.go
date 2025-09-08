@@ -10,6 +10,8 @@ func GetRouter(appState *depend.AppState) *fiber.App {
 
 	app := fiber.New()
 
+	app.State().Set("appState", appState)
+
 	// add state
 	app.Use(func(c fiber.Ctx) error {
 		c.Locals("state", appState)
